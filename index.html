@@ -8,11 +8,11 @@
 </head>
 <body>
     <h1>Guess what letter I'm thinking of</h1>
-    <p> Wins:<br>
-        Losses:<br>
-        Guesses Left:<br>
-        Your Guesses so Far:
-    </p>
+    <p id="wins">Wins:</p>
+	<p id="losses">Losses:</p>
+	<p id="guessesLeft">Guesses Left:</p>
+	<p id="guessesSoFar">Your Guesses so Far:</p>
+    
 
 <script>
 
@@ -30,10 +30,10 @@ function theGame() {
     // to register the user's keystroke <-- nah, part of the function?
     // to compare the user and computer <-- also part of a function?
     // to count down the number of guesses
-        var guessesLeft;
+        var guessesLeft = 9;
     // to show guesses so far
-
-
+	// to log the number of wins
+		var wins = 0;
 
 	function checkIfCorrect() {
 
@@ -50,20 +50,22 @@ function theGame() {
             }
 			
             //if the user guesses correctly
-			else if (userChoice === computerChoice) {
-			
-			//if the user guesses wrong...
-			} else {
+			else if (userChoice === randomLetter) {
+				wins++;
+			} 
+
+			//if the user guesses wrong...			
+			else {
 				guessesLeft = guessesLeft - 1;
 				
 				document.getElementById("guesses-left").innerHTML = guessesLeft; 
 				yourGuess.push(userChoice); //append user's choice to array yourGuess
 
-				console.log("Your guesses so far: " + yourGuess); //test
+				// console.log("Your guesses so far: " + yourGuess); //test
 
 				document.getElementById("your-guesses").innerHTML = yourGuess;
 
-				console.log("Guesses Left: " + guessesLeft); //test
+				// console.log("Guesses Left: " + guessesLeft); //test
 
 				noGuessesLeft();
 			    }
