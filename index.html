@@ -13,5 +13,95 @@
         Guesses Left:<br>
         Your Guesses so Far:
     </p>
+
+<script>
+
+function theGame() {
+
+// assign variables...
+    // to produce a random letter
+        var alphabet = "abcdefghijklmnopqrstuvwxyz";
+        var randomLetter = alphabet[Math.floor(Math.random() * 26)];
+        // Math.floor is essentially =rounddown() in Excel
+        // https://www.w3schools.com/js/js_random.asp
+
+        // console.log(randomLetter); // testing
+
+    // to register the user's keystroke <-- nah, part of the function?
+    // to compare the user and computer <-- also part of a function?
+    // to count down the number of guesses
+        var guessesLeft;
+    // to show guesses so far
+
+
+
+	function checkIfCorrect() {
+
+		document.onkeyup = function(event) {
+
+			//turns user's unicode into corresponding alphanumeric key,
+			//then turns it into a lowercase string.
+			var userChoice = String.fromCharCode(event.keyCode).toLowerCase();
+
+			//if statement to prevent user from choosing a key that's not part of
+			//the alphabet. a = unicode 65, z = unicode 90.
+			if (event.keyCode < 65 || event.keyCode > 90) {
+				alert("Invalid Entry");
+            }
+			
+            //if the user guesses correctly
+			else if (userChoice === computerChoice) {
+			
+			//if the user guesses wrong...
+			} else {
+				guessesLeft = guessesLeft - 1;
+				
+				document.getElementById("guesses-left").innerHTML = guessesLeft; 
+				yourGuess.push(userChoice); //append user's choice to array yourGuess
+
+				console.log("Your guesses so far: " + yourGuess); //test
+
+				document.getElementById("your-guesses").innerHTML = yourGuess;
+
+				console.log("Guesses Left: " + guessesLeft); //test
+
+				noGuessesLeft();
+			    }
+		}
+	}
+
+	function resetGame() {
+		guessesLeft = 9; //reset variable
+		yourGuess = [];  //reset array so it's empty
+		document.getElementById("guesses-left").innerHTML = guessesLeft;  //reset display on screen
+		document.getElementById("your-guesses").innerHTML = yourGuess;    //reset display on screen
+		theGame(); //restart the game with new computerChoice.
+
+	}
+
+	function noGuessesLeft() {
+		if (guessesLeft === 0) {
+			console.log("YOU LOSE."); //test
+			alert("YOU LOSE!");
+			losses = losses + 1
+			document.getElementById("your-losses").innerHTML = losses;
+
+			resetGame();
+
+		} else {
+			console.log("Incorrect. Try again"); //test
+			checkIfCorrect();
+		}
+
+	}
+
+}
+
+
+</script>
+
+
+
+
 </body>
 </html>
