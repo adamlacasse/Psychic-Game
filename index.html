@@ -8,102 +8,52 @@
 </head>
 <body>
     <h1>Guess what letter I'm thinking of</h1>
-    <p id="wins">Wins:</p>
-	<p id="losses">Losses:</p>
-	<p id="guessesLeft">Guesses Left:</p>
-	<p id="guessesSoFar">Your Guesses so Far:</p>
+    <p id="gameStats"></p>
     
 
 <script>
 
-function theGame() {
+    // Define Variables
 
-// assign variables...
-    // to produce a random letter
-        var alphabet = "abcdefghijklmnopqrstuvwxyz";
-        var randomLetter = alphabet[Math.floor(Math.random() * 26)];
-        // Math.floor is essentially =rounddown() in Excel
-        // https://www.w3schools.com/js/js_random.asp
+    var letters = "abcdefghijklmnopqrstuvwxyz";
+    var wins = 0;
+    var losses = 0;
+    var guessesRemaining = 10;
+    var guessedLetters = [];
 
-        // console.log(randomLetter); // testing
+    document.onkeydown = function (event) {
+      var userGuess = event.key; // records player's keystroke to userGuess variable
+      guessedLetters.push(userGuess); // adds the player's keystroke to the guessedLetters array
+      var psychicAnswer = letters[Math.floor(Math.random() * 26)];
 
-    // to register the user's keystroke <-- nah, part of the function?
-    // to compare the user and computer <-- also part of a function?
-    // to count down the number of guesses
-        var guessesLeft = 9;
-    // to show guesses so far
-	// to log the number of wins
-		var wins = 0;
+      //Clears the amount Guess Key Letters when they reach the end of their left # of guesses left
+      var reset = function () {
+        guessesRemaining = 10;
+        guessedLetters = [];
+      }
 
-	function checkIfCorrect() {
+      //If the user's guess matches the psychic's guess, the user's winning score will add
+      if (userGuess === psychicAnswer) {
+        wins++;
+        guessesRemaining = 9;
+      }
+      //If the user's guess doesn't match the psychic's guess, the number of guesses remaining will be deducted
+      else {
+        guessesRemaining--;
+      }
 
-		document.onkeyup = function(event) {
+      //If the user's guess equals 0 and runs out, the user losses and their guesses will start over for the user to try again 
+      if (guessesRemaining === 0) {
+        losses++;
+        guessesRemaining = 9;
+        reset();
+      }
 
-			//turns user's unicode into corresponding alphanumeric key,
-			//then turns it into a lowercase string.
-			var userChoice = String.fromCharCode(event.keyCode).toLowerCase();
-
-			//if statement to prevent user from choosing a key that's not part of
-			//the alphabet. a = unicode 65, z = unicode 90.
-			if (event.keyCode < 65 || event.keyCode > 90) {
-				alert("Invalid Entry");
-            }
-			
-            //if the user guesses correctly
-			else if (userChoice === randomLetter) {
-				wins++;
-			} 
-
-			//if the user guesses wrong...			
-			else {
-				guessesLeft = guessesLeft - 1;
-				
-				document.getElementById("guesses-left").innerHTML = guessesLeft; 
-				yourGuess.push(userChoice); //append user's choice to array yourGuess
-
-				// console.log("Your guesses so far: " + yourGuess); //test
-
-				document.getElementById("your-guesses").innerHTML = yourGuess;
-
-				// console.log("Guesses Left: " + guessesLeft); //test
-
-				noGuessesLeft();
-			    }
-		}
-	}
-
-	function resetGame() {
-		guessesLeft = 9; //reset variable
-		yourGuess = [];  //reset array so it's empty
-		document.getElementById("guesses-left").innerHTML = guessesLeft;  //reset display on screen
-		document.getElementById("your-guesses").innerHTML = yourGuess;    //reset display on screen
-		theGame(); //restart the game with new computerChoice.
-
-	}
-
-	function noGuessesLeft() {
-		if (guessesLeft === 0) {
-			console.log("YOU LOSE."); //test
-			alert("YOU LOSE!");
-			losses = losses + 1
-			document.getElementById("your-losses").innerHTML = losses;
-
-			resetGame();
-
-		} else {
-			console.log("Incorrect. Try again"); //test
-			checkIfCorrect();
-		}
-
-	}
-
-}
-
+      var html = "<p>Wins: " + wins + "</p>" + "<p>losses: " + losses + "<p>Guesses Left: " + guessesRemaining + "<p>Your Guesses so far: " + guessedLetters.join(', '); //Reveal guessed letters here
+      document.getElementById("gameStats").innerHTML = html;
+    }
 
 </script>
-
-
-
 
 </body>
 </html>
