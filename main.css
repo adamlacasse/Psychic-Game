@@ -5,3 +5,7 @@ body {
     -o-background-size: cover;
     background-size: cover;
 }
+
+h1 {
+    color: white;
+}
