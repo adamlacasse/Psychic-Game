@@ -1,20 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Psychic Game</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" type="image/x-icon" href="img/crystal-ball-icon-1.ico" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <link rel="stylesheet" type="text/css" media="screen" href="main.css">
+  <script src="main.js"></script>
 </head>
 
 <body>
-  <h1>Guess what letter I'm thinking of</h1>
-  <p id="gameStats"></p>
+  <h1>Guess what letter I'm thinking of...</h1>
+  <div class="card-panel blue lighten-3" id="panel">
+    <table>
+      <tbody>
+        <tr>
+          <td>Wins:</td>
+          <td id="score-wins">-</td>
+        </tr>
+        <tr>
+          <td>Losses:</td>
+          <td id="score-losses">-</td>
+        </tr>
+        <tr>
+          <td>Guesses Left:</td>
+          <td id="score-left">10</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div id="key-press"></div>
 
-
-  <script src="app.js"></script>
 </body>
 
 </html>
-
