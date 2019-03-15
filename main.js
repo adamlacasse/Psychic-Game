@@ -38,6 +38,9 @@ document.onkeydown = function (event) { // when the user presses down a key anyw
         reset();
     }
 
-    var html = "<p>Wins: " + wins + "</p>" + "<p>losses: " + losses + "<p>Guesses Left: " + guessesRemaining + "<p>Your Guesses so far: " + guessedLetters.join(', '); // separates guessedLetters with a comma
-    document.getElementById("gameStats").innerHTML = html; // sticks them in the HMTL "gameStats" element
+    // var html = "<p>Wins: " + wins + "</p>" + "<p>losses: " + losses + "<p>Guesses Left: " + guessesRemaining + "<p>Your Guesses so far: " + guessedLetters.join(', '); // separates guessedLetters with a comma
+    // document.getElementById("gameStats").innerHTML = html; // sticks them in the HMTL "gameStats" element
+
+    document.getElementById("key-press").innerHTML = `<h1>It's not: ${guessedLetters.join(', ')}</h1>`;
+
 }
