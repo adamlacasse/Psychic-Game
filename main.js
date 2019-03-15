@@ -20,7 +20,7 @@ document.onkeydown = function (event) { // when the user presses down a key anyw
     }
 
     if (letters.indexOf(userGuess) === -1) {
-        alert(`${userGuess} is not a letter, asshat.`);
+        alert(`Ahem... ${userGuess} is not a letter.`);
     }
 
     else if (guessedLetters.indexOf(userGuess) !== -1) {
