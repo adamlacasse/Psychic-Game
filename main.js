@@ -25,16 +25,20 @@ document.onkeydown = function (event) { // when the user presses down a key anyw
     // If user's guess matches psychic's choice then increment wins
     else if (userGuess === psychicChoice) {
         wins++;
+        document.getElementById("score-wins").innerHTML = `<div>${wins}</div>`;
+        reset();
     }
     // else (if the letters don't match is implied) then reduce guessesRemaining
     else {
         guessedLetters.push(userGuess);
         guessesRemaining--;
+        document.getElementById("score-left").innerHTML = `<div>${guessesRemaining}</div>`;
     }
 
     // if guessesRemaining gets to zero increment losses and run the reset function
     if (guessesRemaining === 0) {
         losses++;
+        document.getElementById("score-losses").innerHTML = `<div>${losses}</div>`;
         reset();
     }
 
