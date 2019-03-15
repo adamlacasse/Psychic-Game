@@ -4,6 +4,10 @@ var losses = 0;
 var guessesRemaining = 10;
 var guessedLetters = [];
 
+document.addEventListener("DOMContentLoaded", function(event) { 
+    document.getElementById("result").style.visibility = "hidden"; 
+  });
+
 document.onkeydown = function (event) { // when the user presses down a key anywhere in the document, run this function
     var userGuess = event.key; // records player's keystroke to userGuess variable
     var psychicChoice = letters[Math.floor(Math.random() * 26)]; // chooses a random letter from the letters array and puts it in the psychicChoice variable
@@ -12,6 +16,7 @@ document.onkeydown = function (event) { // when the user presses down a key anyw
     var reset = function () {
         guessesRemaining = 10;
         guessedLetters = [];
+        document.getElementById("score-left").innerHTML = `<div>${guessesRemaining}</div>`;
     }
 
     if (letters.indexOf(userGuess) === -1) {
@@ -26,6 +31,11 @@ document.onkeydown = function (event) { // when the user presses down a key anyw
     else if (userGuess === psychicChoice) {
         wins++;
         document.getElementById("score-wins").innerHTML = `<div>${wins}</div>`;
+        document.getElementById("result").innerHTML = `<h1>You Win!</h1>`;
+        document.getElementById("result").style.visibility = "visible"; 
+        setTimeout(() => {
+            document.getElementById("result").style.visibility = "hidden"; 
+        }, 2000);
         reset();
     }
     // else (if the letters don't match is implied) then reduce guessesRemaining
@@ -39,6 +49,11 @@ document.onkeydown = function (event) { // when the user presses down a key anyw
     if (guessesRemaining === 0) {
         losses++;
         document.getElementById("score-losses").innerHTML = `<div>${losses}</div>`;
+        document.getElementById("result").innerHTML = `<h1>You Lose!</h1>`;
+        document.getElementById("result").style.visibility = "visible";
+        setTimeout(() => {
+            document.getElementById("result").style.visibility = "hidden"; 
+        }, 2000); 
         reset();
     }
 

@@ -11,7 +11,12 @@ h1 {
     text-shadow: 3px 3px black;
 }
 
-#panel {
+.card-panel {
+    float: left;
     width: 300px;
     margin-left: 1%;
 }
+
+/* #key-press {
+    display:block;
+} */
