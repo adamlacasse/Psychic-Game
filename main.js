@@ -31,7 +31,7 @@ document.onkeydown = function (event) { // when the user presses down a key anyw
     else if (userGuess === psychicChoice) {
         wins++;
         document.getElementById("score-wins").innerHTML = `<div>${wins}</div>`;
-        document.getElementById("result").innerHTML = `<h1>You Win!</h1>`;
+        document.getElementById("result").innerHTML = `<h1>Win!</h1>`;
         document.getElementById("result").style.visibility = "visible"; 
         setTimeout(() => {
             document.getElementById("result").style.visibility = "hidden"; 
@@ -49,7 +49,7 @@ document.onkeydown = function (event) { // when the user presses down a key anyw
     if (guessesRemaining === 0) {
         losses++;
         document.getElementById("score-losses").innerHTML = `<div>${losses}</div>`;
-        document.getElementById("result").innerHTML = `<h1>You Lose!</h1>`;
+        document.getElementById("result").innerHTML = `<h1>Loss!</h1>`;
         document.getElementById("result").style.visibility = "visible";
         setTimeout(() => {
             document.getElementById("result").style.visibility = "hidden"; 
