@@ -38,11 +38,7 @@ h3 {
 
 #scoreboard td {
     padding: 0 1rem;
-}
-
-#no-guesses {
-    margin-top: 2rem;
-    text-align: center;
+    min-width: 2rem;
 }
 
 #past-guesses {
@@ -73,6 +69,18 @@ h3 {
 
 #guesses-list span {
     margin-left: 1.25rem;
+}
+
+#btn-wrapper {
+    margin-top: 3rem;
+    text-align: center;
+}
+
+#start-btn {
+    background-color: lightblue;
+    font-size: 1.5rem;
+    padding: .5rem 1rem;
+    cursor: pointer;
 }
 
 #modal {

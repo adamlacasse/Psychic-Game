@@ -45,12 +45,8 @@
       </table>
     </div>
 
-    <div id="no-guesses">
-      You have not yet made a guess.
-    </div>
-
     <div id="past-guesses">
-      <h3>Your guesses so far</h3>
+      <h3>Your Guesses</h3>
       <ol id="guesses-list">
         <li><span id="li-1"></span></li>
         <li><span id="li-2"></span></li>
@@ -64,6 +60,11 @@
         <li><span id="li-10"></span></li>
       </ol>
     </div>
+
+    <div id="btn-wrapper">
+      <button id="start-btn" type="button" onclick="setupGame()">Begin</button>
+    </div>
+
   </main>
   <div id="modal">
     <div id="modal-close-div">
@@ -73,7 +74,6 @@
     <p id="modal-content">
       Here's the modal content
     </p>
-    <div id="modal-countdown">countdown</div>
   </div>
 </body>
 

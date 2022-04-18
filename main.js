@@ -1,86 +1,86 @@
 const letters = "abcdefghijklmnopqrstuvwxyz";
 let wins = 0;
 let losses = 0;
-let guessesRemaining = 10;
-let guessedLetters = [];
+let guessesRemaining;
+let guessedLetters;
+let psychicChoice;
 
-const psychicChoice = letters[Math.floor(Math.random() * 26)];
+const startBtnWrapper = document.getElementById("btn-wrapper");
 
-const gamesPlayedElement = document.getElementById("games-played");
-gamesPlayedElement.textContent = wins + losses;
+const setupGame = () => {
+    guessesRemaining = 10;
+    guessedLetters = [];
 
-const startGame = () => {
-    document.getElementById("no-guesses").style.display = "none";
+    psychicChoice = letters[Math.floor(Math.random() * 26)];
+
+    const guessesList = document.getElementById("guesses-list");
+    [...guessesList.children].forEach(element => {
+        element.firstChild.textContent = "";
+    });
+
+    startBtnWrapper.style.display = "none";
+
+    document.addEventListener("keyup", handleGameplayKeyup);
     document.getElementById("past-guesses").style.display = "flex";
 };
 
-// Modal schtuff
-const modal = document.getElementById("modal");
-
-const modalCloseButton = document.getElementById("modal-close-button");
-modalCloseButton.addEventListener("click", () => {
-    modal.style.display = "none";
-});
-
-const giveUserFeedbackInTheModal = (title, message) => {
-    const modalTitle = document.getElementById("modal-title");
-    modalTitle.textContent = title;
-
-    const modalContent = document.getElementById("modal-content");
-    modalContent.textContent = message;
+const handleModalOpen = (title, message) => {
+    const modal = document.getElementById("modal");
     modal.style.display = "block";
-};
 
-const handleModalCountdown = () => {
-    let countdown = 5;
-
-    const modalCountdown = document.getElementById("modal-countdown");
-    modalCountdown.textContent = `This modal will close in ${countdown} seconds`;
-
-    const modalCountdownInterval = setInterval(() => {
-        countdown--;
-        modalCountdown.textContent = `This modal will close in ${countdown} seconds`;
-        if (countdown === 0) {
-            clearInterval(modalCountdownInterval);
+    document.removeEventListener("keyup", handleGameplayKeyup);
+    const handleModalKeyup = (e) => {
+        if (e.key === "Esc" || e.key === "Escape") {
             modal.style.display = "none";
         }
-    }, 1000);
+    };
+    document.addEventListener("keyup", handleModalKeyup);
+    
+    const modalTitle = document.getElementById("modal-title");
+    modalTitle.textContent = title;
+    
+    const modalContent = document.getElementById("modal-content");
+    modalContent.textContent = message;
+
+    const modalCloseButton = document.getElementById("modal-close-button");
+    modalCloseButton.addEventListener("click", () => {
+        modal.style.display = "none";
+        document.removeEventListener("keyup", handleModalKeyup);
+    });
+
+    document.getElementById("games-played").textContent = wins + losses;
+    document.getElementById("wins").textContent = wins;
+    document.getElementById("losses").textContent = losses;
+    
+    document.getElementById("start-btn").textContent = "Play Again?";
+    startBtnWrapper.style.display = "block";
 };
 
-document.addEventListener("keyup", function(event) {
+const handleGameplayKeyup = event => {
     const userGuess = event.key.toLowerCase();
 
-    if (modal.style.display === "block" && userGuess === "escape") {
-        modal.style.display = "none";
-        // TODO: clear modal interval
+    if (!letters.includes(userGuess) || guessedLetters.includes(userGuess)) {
+        console.warn("Already guessed or invalid letter");
         return;
-    }
-
-    if (!letters.includes(userGuess)) {
-        giveUserFeedbackInTheModal("Not a Valid Letter", "Please enter a letter A-Z");
-        handleModalCountdown();
-        return;
-    }
-
-    if (guessesRemaining === 10) {
-        startGame();
     }
 
     guessesRemaining--;
     const guessesLeftElement = document.getElementById("guesses-left");
     guessesLeftElement.textContent = guessesRemaining;
 
+    const guessedLetterElement = document.getElementById(`li-${10 - guessesRemaining}`);
+    guessedLetterElement.textContent = userGuess;
+
+    guessedLetters.push(userGuess);
 
     if (userGuess === psychicChoice) {
         wins++;
-        giveUserFeedbackInTheModal("You win!", "Good Job!");
-    }
-
-    if (letters.includes(userGuess)) {
-        guessedLetters.push(userGuess);
-
-        const guessedLetterElement = document.getElementById(`li-${10 - guessesRemaining}`);
-        guessedLetterElement.textContent = userGuess;
+        handleModalOpen("You win!", "Good Job!");
         return;
     }
-});
+
+    if (guessesRemaining === 0) {
+        losses++;
+        handleModalOpen("You lose!", "Better luck next time!");
+    }
+}
