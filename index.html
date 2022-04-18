@@ -7,40 +7,74 @@
   <title>Psychic Game</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" type="image/x-icon" href="img/crystal-ball-icon-1.ico" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merienda&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" type="text/css" media="screen" href="main.css">
-  <script src="main.js"></script>
+  <script src="main.js" defer></script>
 </head>
 
 <body>
-  <h1>Guess what letter I'm thinking of...</h1>
+  <main>
+    <h1>Psychic Game</h1>
+    <h2>Guess what letter I'm thinking of!</h2>
 
-  <div class="card-panel blue lighten-3">
-    <table>
-      <tbody>
-        <tr>
-          <td>Wins:</td>
-          <td id="score-wins">-</td>
-        </tr>
-        <tr>
-          <td>Losses:</td>
-          <td id="score-losses">-</td>
-        </tr>
-        <tr>
-          <td>Guesses Left:</td>
-          <td id="score-left">10</td>
-        </tr>
-      </tbody>
-    </table>
+    <div id="scoreboard">
+      <h3>Your Progress</h3>
+      <table>
+        <tbody>
+          <tr>
+            <td>Games Played:</td>
+            <td id="games-played">0</td>
+          </tr>
+          <tr>
+            <td>Wins:</td>
+            <td id="wins">0</td>
+          </tr>
+          <tr>
+            <td>Losses:</td>
+            <td id="losses">0</td>
+          </tr>
+          <tr>
+            <td>Guesses Left:</td>
+            <td id="guesses-left">10</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="past-guesses">
+      <h3>Your Guesses</h3>
+      <ol id="guesses-list">
+        <li><span id="li-1"></span></li>
+        <li><span id="li-2"></span></li>
+        <li><span id="li-3"></span></li>
+        <li><span id="li-4"></span></li>
+        <li><span id="li-5"></span></li>
+        <li><span id="li-6"></span></li>
+        <li><span id="li-7"></span></li>
+        <li><span id="li-8"></span></li>
+        <li><span id="li-9"></span></li>
+        <li><span id="li-10"></span></li>
+      </ol>
+    </div>
+
+    <div id="btn-wrapper">
+      <button id="start-btn" type="button" onclick="setupGame()">Begin</button>
+    </div>
+
+  </main>
+  <div id="modal">
+    <div id="modal-close-div">
+      <button id="modal-close-button">X</button>
+    </div>
+    <h2 id="modal-title">Here's the modal title</h2>
+    <p id="modal-content">
+      Here's the modal content
+    </p>
   </div>
-  <div class="card-panel blue lighten-3" id="result">
-    foo
-  </div>
-
-  <div style="clear:both;"></div>
-  <div id="key-press"></div>
-
 </body>
 
 </html>
