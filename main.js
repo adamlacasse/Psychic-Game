@@ -13,6 +13,9 @@ const setupGame = () => {
 
     psychicChoice = letters[Math.floor(Math.random() * 26)];
 
+    const guessesLeftElement = document.getElementById("guesses-left");
+    guessesLeftElement.textContent = guessesRemaining;
+
     const guessesList = document.getElementById("guesses-list");
     [...guessesList.children].forEach(element => {
         element.firstChild.textContent = "";
